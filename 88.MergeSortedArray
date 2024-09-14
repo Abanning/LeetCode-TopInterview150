@@ -1,12 +1,41 @@
-Merge Sorted Array
+Merge and Sort Simple and Quick Solution
 
-Question: 
-You are given two integer arrays "nums1" and "nums2," sorted in non-decreasing order, and two 
-integers "m" and "n," representing the number of elements in "nums1" and "nums2" respectively.
+ajbanning
+Sep 12, 2024
+C++
 
-Merge "nums1" and "nums2" into a single array sorted in non-decreasing order.
+Intuition
+Concatenate the input vectors, then sort.
 
-The final sorted array should not be returned by the function, but instead be stored inside
-the array "nums1." To accomodate this,. "nums1" has a length of m + n, where the first "m" elements
-denote the elements that should be merged, and the last "n" elements are set to 0 and should be
-ignored. "nums2" has a length of n.
+Approach
+Because nums1 contains default values of 0 at all m + i indexes, we need to overwrite those values with the values of nums2. Then use the std::sort() method to sort the the result.
+
+Complexity
+
+Time complexity:
+O(Nlog(N))
+Let m + n = N.
+For loop: O(n)
+Sort algorithm: O(Nlog(N))
+Overall: O(Nlog(N)) > O(n) --> O(Nlog(N))
+
+Space complexity:
+O(m + n)
+Space complexity of inputs: O(m + n)
+Space complexity of std::sort(): O(log(n)) average case
+Overall: O(m + n) > O(log(n)) --> O(m + n)
+
+
+Code
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int n2index = 0;
+        for (int i = m; i < m + n; i++) {
+            nums1[i] = nums2[n2index];
+            n2index++;
+        }
+
+        sort(nums1.begin(), nums1.end());
+    }
+};
